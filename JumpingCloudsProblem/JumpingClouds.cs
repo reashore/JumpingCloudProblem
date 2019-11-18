@@ -14,12 +14,12 @@ namespace JumpingCloudsProblem
 
             if (_cloudArray[0] != 0)
             {
-                throw new ArgumentException("First value must be 0");
+                throw new ArgumentException("First value of cloudArray must be 0");
             }
 
             if (_cloudArray[_lastIndex] != 0)
             {
-                throw new ArgumentException("Last value must be 0");
+                throw new ArgumentException("Last value of cloudArray must be 0");
             }
 
             int minimumJumps = GetMinimumJumps(0);
@@ -34,10 +34,10 @@ namespace JumpingCloudsProblem
                 throw new Exception("Path array elements must be 0");
             }
 
-            // check for end
             int index1 = n + 1;
             int index2 = n + 2;
 
+            // check for cloudArrayend
             if (index2 == _lastIndex)
             {
                 return 1;
@@ -52,22 +52,14 @@ namespace JumpingCloudsProblem
             int next2 = _cloudArray[index2];
 
             // next1, next2
-            // 0, 0     2 choices
-            // 0, 1     1 choice
-            // 1, 0     1 choice
-            // 1, 1     impossible
+            //   0,      0     2 choices
+            //   0,      1     1 choice
+            //   1,      0     1 choice
+            //   1,      1     impossible
 
-            if (next1 == 0 && next2 == 0)
+            if (next1 == 1 && next2 == 1)
             {
-                int minimumJumps1 = GetMinimumJumps(index1);
-                int minimumJumps2 = GetMinimumJumps(index2);
-
-                if (minimumJumps1 <= minimumJumps2)
-                {
-                    return 1 + minimumJumps1;
-                }
-
-                return 1 + minimumJumps2;
+                throw new Exception("Invalid path");
             }
 
             if (next1 == 0 && next2 == 1)
@@ -80,12 +72,16 @@ namespace JumpingCloudsProblem
                 return 1 + GetMinimumJumps(index2);
             }
 
-            if (next1 == 1 && next2 == 1)
+            // next1 == 0 && next2 == 0
+            int minimumJumps1 = GetMinimumJumps(index1);
+            int minimumJumps2 = GetMinimumJumps(index2);
+
+            if (minimumJumps1 <= minimumJumps2)
             {
-                throw new Exception("Invalid path");
+                return 1 + minimumJumps1;
             }
 
-            return 0;
+            return 1 + minimumJumps2;
         }
     }
 }

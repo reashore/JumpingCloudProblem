@@ -18,7 +18,7 @@ namespace JumpingCloudsProblem
                 throw new ArgumentException("Last value must be 0");
             }
 
-            int index = 0;
+            const int index = 0;
             int minimumJumps = GetMinimumJumps(index, cloudArray, lastIndex);
 
             return minimumJumps;
@@ -31,10 +31,10 @@ namespace JumpingCloudsProblem
                 throw new Exception("Path array elements must be 0");
             }
 
-            // check for end
             int index1 = index + 1;
             int index2 = index + 2;
 
+            // check for cloudArray end
             if (index2 == lastIndex)
             {
                 return 1;
@@ -49,10 +49,10 @@ namespace JumpingCloudsProblem
             int next2 = cloudArray[index2];
 
             // next1, next2
-            // 0, 0     2 choices
-            // 0, 1     1 choice
-            // 1, 0     1 choice
-            // 1, 1     impossible
+            //   0,     0     2 choices
+            //   0,     1     1 choice
+            //   1,     0     1 choice
+            //   1,     1     impossible
 
             if (next1 == 1 && next2 == 1)
             {
